@@ -3,7 +3,7 @@
     <Appenders>
         <RollingRandomAccessFile name="InfoFile" fileName="C:/work/Log/info.log" immediateFlush="false" append="true"  filePattern="C:/work/Log/info-%d{yyyy-MM-dd}.log.gz">
             <PatternLayout>
-                <pattern>%highlight{[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{-10}.%M() @%L - %msg%n}{FATAL=white, ERROR=red, WARN=blue, INFO=black, DEBUG=green, TRACE=blue}</pattern>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{-10}.%M() @%L - %msg%n</pattern>
             </PatternLayout>
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
@@ -11,7 +11,9 @@
         </RollingRandomAccessFile>
        
         <Console name="Console" target="SYSTEM_OUT" follow="true">
-            <PatternLayout pattern="%highlight{[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{-10}.%M() @%L - %msg%n}{FATAL=white, ERROR=red, WARN=blue, INFO=black, DEBUG=green, TRACE=blue}"/>
+            <PatternLayout>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{-10}.%M() @%L - %msg%n</pattern>
+            </PatternLayout>        
         </Console>
     </Appenders>
     <Loggers>
