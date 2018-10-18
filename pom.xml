@@ -28,6 +28,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--Health Check-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
         <!--Java Persistence API-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -53,6 +58,11 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lmax</groupId>
+            <artifactId>disruptor</artifactId>
+            <version>3.4.2</version>
         </dependency>
     </dependencies>
     <build>

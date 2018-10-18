@@ -22,18 +22,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class UserController {
 
-    Logger logger = LogManager.getLogger(UserController.class);
-    
+    private static Logger logger = LogManager.getLogger();
+
     @Autowired//Inject userService class, don't need to init new userservice
     private UserService userService;
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    private List<User> getUser() {
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    private String index() {
+        logger.error("An ERROR Message");
         logger.trace("A TRACE Message");
         logger.debug("A DEBUG Message");
         logger.info("An INFO Message");
         logger.warn("A WARN Message");
-        logger.error("An ERROR Message");
+        return "Welcome to Spring Boot";
+    }
+
+    @RequestMapping(value = "/user", method = RequestMethod.GET)
+    private List<User> getUser() {
         return userService.getListUser();
     }
 

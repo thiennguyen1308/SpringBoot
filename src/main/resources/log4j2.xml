@@ -1,37 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
-    <Appenders>
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout
-                pattern="%style{%d{ISO8601}}{black} %highlight{%-5level }[%style{%t}{bright,blue}] %style{%C{1.}}{bright,yellow}: %msg%n%throwable" />
-        </Console>
- 
-        <RollingFile name="RollingFile"
-                     fileName="C:/work/Log/error.log"
-                     filePattern="C:/work/Log/app-%d{MM-dd-yyyy}.log.gz">
+    <!--    <Appenders>   
+        <RandomAccessFile name="InfoFile" fileName="C:\work\Log\info.log" immediateFlush="true" append="false">
             <PatternLayout>
-                <pattern>%d %p %C{1.} [%t] %m%n</pattern>
+                <pattern>[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n</pattern>
+            </PatternLayout>
+        </RandomAccessFile>
+    </Appenders>-->
+    <Appenders>
+        <RollingRandomAccessFile name="InfoFile" fileName="C:/work/Log/info.log" immediateFlush="false" append="true"  filePattern="C:/work/Log/info-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout>
+                <pattern>%highlight{[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{-10}.%M() @%L - %msg%n}{FATAL=white, ERROR=red, WARN=blue, INFO=black, DEBUG=green, TRACE=blue}</pattern>
             </PatternLayout>
             <Policies>
-                <!-- rollover on startup, daily and when the file reaches 
-                10 MegaBytes -->
-                <OnStartupTriggeringPolicy />
-                <SizeBasedTriggeringPolicy
-                    size="10 MB" />
-                <TimeBasedTriggeringPolicy />
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
             </Policies>
-        </RollingFile>
+        </RollingRandomAccessFile>
+       
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="%highlight{[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{-10}.%M() @%L - %msg%n}{FATAL=white, ERROR=red, WARN=blue, INFO=black, DEBUG=green, TRACE=blue}"/>
+        </Console>
     </Appenders>
- 
     <Loggers>
-        <!-- LOG everything at INFO level -->
         <Root level="info">
             <AppenderRef ref="Console" />
-            <AppenderRef ref="RollingFile" />
         </Root>
- 
-        <!-- LOG "com.baeldung*" at TRACE level -->
-        <Logger name="com.faber" level="trace"></Logger>
+        <AsyncLogger name="com.faber" level="info" includeLocation="true">
+            <AppenderRef ref="InfoFile"/>
+        </AsyncLogger>
     </Loggers>
  
 </Configuration>
