@@ -24,24 +24,28 @@ public class CustomSecurityFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
+        
+        //Ignore custom security check for GET method
         if (req.getMethod().equals("GET")) {
-            chain.doFilter(request, response);
+            chain.doFilter(request, response);//pass to next filter
             return;
         }
 
         String origin = req.getHeader("origin");
         String referer = req.getHeader("referer");
+        //Check if user connect from bot or none origin, none referrer method
         if (origin == null || origin.equals("") || referer == null || referer.equals("")) {
             HttpServletResponse servletResponse = (HttpServletResponse) response;
-            servletResponse.sendError(403);
+            servletResponse.sendError(403);//return forbidden status code
             return;
         }
 
         try {
             URL originURL = new URL(origin);
             URL refererURL = new URL(referer);
+            //Check if client host, referrer connected from access host list
             if (EnvironmentVariable.getDomainAllowCORS().contains(originURL.getHost()) && EnvironmentVariable.getDomainAllowCORS().contains(refererURL.getHost())) {
-                chain.doFilter(request, response);
+                chain.doFilter(request, response);//pass to next filter
                 return;
             }
         } catch (MalformedURLException ex) {
@@ -49,8 +53,6 @@ public class CustomSecurityFilter extends GenericFilterBean {
         }
         HttpServletResponse servletResponse = (HttpServletResponse) response;
         servletResponse.sendError(403);
-        chain.doFilter(request, response);
-
+        chain.doFilter(request, response);//pass to next filter
     }
-
 }
