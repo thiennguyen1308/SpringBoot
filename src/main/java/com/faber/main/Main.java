@@ -9,7 +9,6 @@ import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.http.HttpStatus;
 //</editor-fold>
 
@@ -19,7 +18,6 @@ import org.springframework.http.HttpStatus;
  */
 //@EnableAutoConfiguration
 @SpringBootApplication
-@EnableJpaRepositories("com.faber.repositories")
 @EntityScan("com.faber.entities")
 @ComponentScan("com.faber.*")
 public class Main {

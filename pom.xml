@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.0.5.RELEASE</version>
+        <version>2.0.0.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <dependencies>
@@ -28,15 +28,20 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--Spring security-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <!--Health Check-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!--Java Persistence API-->
+        <!--Spring boot freemarker template engine-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
         </dependency>
         <!--MySQL connector J-->
         <dependency>
@@ -48,11 +53,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
-        </dependency>
-        <!--Independent libraries of spring entity manager factory-->
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
         </dependency>
         <!-- Add Log4j2 Dependency -->
         <dependency>
@@ -66,10 +66,22 @@
         </dependency>
     </dependencies>
     <build>
+ 
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <mainClass>com.faber.main.Main</mainClass>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
