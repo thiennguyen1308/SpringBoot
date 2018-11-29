@@ -15,6 +15,7 @@ import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.ErrorPage;
 import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.HttpStatus;
@@ -28,6 +29,7 @@ import org.springframework.http.HttpStatus;
 @SpringBootApplication
 @EntityScan("com.faber.entities")
 @ComponentScan("com.faber.*")
+@EnableCaching
 public class Main {
 
     public static ManagedChannel channel = null;

@@ -54,6 +54,11 @@
             <artifactId>spring-boot-devtools</artifactId>
             <optional>true</optional>
         </dependency>
+        <!--Add cache-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
+        </dependency>
         <!-- Add Log4j2 Dependency -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
