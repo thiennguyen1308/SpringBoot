@@ -21,13 +21,15 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    @Override
+//    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().disable();//enable CORS
-        http.addFilterAfter(new CustomSecurityFilter(), CsrfFilter.class);//Add custom security filter
-        http.exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler());//Add custom access denied handler
+        http.csrf().disable();//enable CORS
+        
+//        http.addFilterAfter(new CustomSecurityFilter(), CsrfFilter.class);//Add custom security filter
+//        http.exceptionHandling().accessDeniedHandler(new CustomAccessDeniedHandler());//Add custom access denied handler
 //        http.headers().httpStrictTransportSecurity().includeSubDomains(true).maxAgeInSeconds(31536000);
-        http.headers().contentSecurityPolicy("default-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src localhost; script-src 'self' 'unsafe-inline'; font-src 'self' fonts.gstatic.com; style-src 'self' 'unsafe-inline'  fonts.googleapis.com");//Add csp
+//        http.headers().contentSecurityPolicy("default-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src localhost; script-src 'self' 'unsafe-inline'; font-src 'self' fonts.gstatic.com; style-src 'self' 'unsafe-inline'  fonts.googleapis.com");//Add csp
     }
 
     @Bean
